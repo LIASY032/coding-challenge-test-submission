@@ -10,9 +10,10 @@
 }
 
 .item {
-  align-items: center;
+  align-items: flex-start; /* zh: 小屏竖排更自然；en: better for vertical flow on small screens */
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .item address {
@@ -21,4 +22,12 @@
 
 .item h3 {
   margin: 0 0 0.5em;
+}
+
+@media (min-width: 640px) {
+  .item {
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+  }
 }

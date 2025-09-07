@@ -1,36 +1,37 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 
 import Button from '../Button/Button';
 import InputText from '../InputText/InputText';
 import $ from './Form.module.css';
+import { FormExtraProps } from '@/types';
 
 interface FormEntry {
   name: string;
   placeholder: string;
-  // TODO: Defined a suitable type for extra props
-  // This type should cover all different of attribute types
-  extraProps: any;
+  extraProps: FormExtraProps;
 }
 
 interface FormProps {
   label: string;
-  loading: boolean;
+  loading?: boolean;
   formEntries: FormEntry[];
-  onFormSubmit: () => void;
+  onFormSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
   submitText: string;
+  footer?: ReactNode;
 }
 
 const Form: FunctionComponent<FormProps> = ({
   label,
-  loading,
+  loading = false,
   formEntries,
   onFormSubmit,
-  submitText
+  submitText,
+  footer
 }) => {
   return (
     <form onSubmit={onFormSubmit}>
-      <fieldset>
-        <legend>{label}</legend>
+      <fieldset className={$.fieldset}>
+        <legend className={$.legend}>{label}</legend>
         {formEntries.map(({ name, placeholder, extraProps }, index) => (
           <div key={`${name}-${index}`} className={$.formRow}>
             <InputText
@@ -45,6 +46,7 @@ const Form: FunctionComponent<FormProps> = ({
         <Button loading={loading} type="submit">
           {submitText}
         </Button>
+        {footer}
       </fieldset>
     </form>
   );

@@ -3,9 +3,9 @@
   border-radius: var(--border-radius-xl);
   box-shadow: 0 15px 15px rgba(0, 0, 0, 0.15);
   color: var(--color-text);
-  margin: 3rem auto;
+  margin: 2rem auto; /* zh: 小屏减少外边距；en: reduce margins on small screens */
   max-width: var(--width-content);
-  padding: 2rem 3rem;
+  padding: 1.25rem 1.5rem; /* zh: 小屏减少内边距；en: reduce padding on small screens */
   width: 100%;
 }
 
@@ -13,4 +13,12 @@
   --color-background: #141925;
   --color-text: #fff;
   --color-text-light: #878b9a;
+}
+
+/* zh: 中屏增大内边距；en: increase padding on medium screens */
+@media (min-width: 768px) {
+  .section {
+    margin: 3rem auto;
+    padding: 2rem 3rem;
+  }
 }

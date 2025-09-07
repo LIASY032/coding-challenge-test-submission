@@ -1,7 +1,7 @@
 .button {
   border-radius: var(--border-radius-default);
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-  color: white;
+  color: #fff;
   cursor: pointer;
   font-size: 0.9em;
   font-weight: bold;
@@ -23,3 +23,39 @@
 /** TODO: Create separate styles for .primary and .secondary variants of this button:
 * - Must use the CSS variables declared in App.css
 */
+/* zh: 主要按钮；en: primary button */
+.primary {
+  background: var(--color-brand);
+  border: 1px solid var(--color-brand);
+}
+
+/* zh: 次要按钮；en: secondary button */
+.secondary {
+  background: transparent;
+  border: 1px solid var(--color-brand);
+  color: var(--color-brand);
+}
+
+/* zh: 加载中微调；en: subtle loading state tweaks */
+.loading {
+  opacity: 0.8;
+}
+
+/* zh: 简易加载动画点；en: simple loading dot spinner */
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  border-top-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  vertical-align: -0.2em;
+  margin-left: 0.5em;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

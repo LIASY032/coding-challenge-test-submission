@@ -26,26 +26,33 @@ export default async function handle(
     });
   }
 
-  /** TODO: Implement the validation logic to ensure input value
-   *  is all digits and non negative
-   */
+  /** zh: 校验是否为全数字且非负; en: validate that input is all digits and non-negative */
   const isStrictlyNumeric = (value: string) => {
-    return true;
+    return /^\d+$/.test(value);
   };
 
-  /** TODO: Refactor the code below so there is no duplication of logic for postCode/streetNumber digit checks. */
-  if (!isStrictlyNumeric(postcode as string)) {
-    return res.status(400).send({
-      status: "error",
-      errormessage: "Postcode must be all digits and non negative!",
-    });
-  }
+  /** zh: 各字段的数字校验错误消息; en: error messages for numeric validation per field */
+  const FIELD_ERROR_MESSAGES: Record<"postcode" | "streetnumber", string> = {
+    postcode: "Postcode must be all digits and non negative!",
+    streetnumber: "Street Number must be all digits and non negative!",
+  };
 
-  if (!isStrictlyNumeric(streetnumber as string)) {
-    return res.status(400).send({
-      status: "error",
-      errormessage: "Street Number must be all digits and non negative!",
-    });
+  /** zh: 返回字段的数字校验错误（无错误则为 null）; en: return field's numeric validation error (null if none) */
+  const getNumericFieldError = (
+    value: string,
+    field: "postcode" | "streetnumber"
+  ): string | null => {
+    return isStrictlyNumeric(value) ? null : FIELD_ERROR_MESSAGES[field];
+  };
+
+  // zh: 合并校验两个字段，任一不通过则返回; en: validate both fields and short-circuit on first failure
+  const firstNumericError =
+    getNumericFieldError(postcode as string, "postcode") ||
+    getNumericFieldError(streetnumber as string, "streetnumber");
+  if (firstNumericError) {
+    return res
+      .status(400)
+      .send({ status: "error", errormessage: firstNumericError });
   }
 
   const mockAddresses = generateMockAddresses(

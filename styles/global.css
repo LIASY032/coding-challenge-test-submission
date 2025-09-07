@@ -1,20 +1,23 @@
+/* zh: 引入 Google Fonts Roboto；en: Import Google Fonts Roboto */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
 }
 
-/* TODO: Add the 'Roboto' font from Google fonts and add it as a global CSS var called `--font-primary` */
-/* TODO: Make application responsive. It is already for the most part, but it is not optimal for smaller screens.
-* - Making the application responsive using the Mobile First principle.
-*/
+/* zh: 添加 Roboto 变量与移动优先响应式计划；en: Add Roboto var and mobile-first responsiveness */
 
+/* zh: 修正 :root 选择器并添加 --font-primary；en: Fix :root selector and add --font-primary */
 :root {
   --border-radius-default: 4px;
   --border-radius-xl: 15px;
@@ -24,6 +27,10 @@ code {
   --color-brand: #413ef7;
   --color-text: #141925;
   --color-text-light: #72787d;
+  /* zh: 主字体变量；en: primary font variable */
+  --font-primary: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
   --width-input: 20rem;
   --width-content: 30rem;
 }
@@ -34,13 +41,13 @@ code {
 
 body {
   accent-color: var(--color-brand);
-  font-size: 18px;
+  font-size: 16px; /* zh: 移动端基准字体更小；en: smaller base font for mobile */
   font-family: var(--font-primary);
   background: var(--color-accent);
 }
 
 main {
-  padding: 2rem;
+  padding: 1rem; /* zh: 移动端缩小内边距；en: reduce padding on small screens */
 }
 
 small {
@@ -53,12 +60,31 @@ fieldset {
   border: none;
   border-bottom: 1px solid var(--color-accent);
   border-top: 1px solid var(--color-accent);
-  margin: 2rem 0;
+  margin: 1.25rem 0; /* zh: 减小垂直间距；en: reduce vertical spacing */
   max-width: var(--width-input);
-  padding: 1rem 0;
+  padding: 0.75rem 0; /* zh: 减小内边距；en: reduce padding */
   width: 100%;
 }
 
 legend {
   color: var(--color-text-light);
+}
+
+/* zh: 断点上调排版与尺寸；en: bump sizes on larger viewports */
+@media (min-width: 480px) {
+  body {
+    font-size: 17px;
+  }
+  main {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 18px;
+  }
+  main {
+    padding: 2rem;
+  }
 }

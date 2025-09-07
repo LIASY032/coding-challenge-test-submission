@@ -20,15 +20,14 @@ const Button: FunctionComponent<ButtonProps> = ({
 }) => {
   return (
     <button
-      // TODO: Add conditional classNames
-      // - Must have a condition to set the '.primary' className
-      // - Must have a condition to set the '.secondary' className
-      // - Display loading spinner per demo video. NOTE: add data-testid="loading-spinner" for spinner element (used for grading)
-      className={$.button}
+      /* zh: 按变体设置样式类；en: apply classes based on variant */
+      className={[$.button, variant === 'primary' ? $.primary : $.secondary, loading ? $.loading : ''].filter(Boolean).join(' ')}
       type={type}
       onClick={onClick}
     >
       {children}
+      {/* zh: 加载时显示微型转圈；en: show mini spinner when loading */}
+      {loading && <span data-testid="loading-spinner" className={$.spinner} />}
     </button>
   );
 };

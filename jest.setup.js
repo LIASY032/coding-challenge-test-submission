@@ -3,4 +3,5 @@
 
 // Used for __tests__/testing-library.js
 // Learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom/extend-expect';
+// v6 移除了 extend-expect 入口；v6 removed the extend-expect entry
+import '@testing-library/jest-dom';
